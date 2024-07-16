@@ -2,7 +2,7 @@
   <x-slot:title>Edit Category</x-slot:title>
   <div class="container">
     <div class="row">
-      <div class="col-4">
+      <div class="col-6">
         <div class="card">
           <form class="row g-3 p-3" action="{{ route('categories.update', ['category' => $category->id]) }}" method="post">
             @csrf
@@ -17,9 +17,9 @@
                 <label class="form-check-label" for="active">Aktif</label>
               </div>
             </div>
-            <div class="col-12 d-grid gap-2 d-md-flex justify-content-md-end">
-              <a href="/categories" class="btn btn-sm btn-danger">Batal</a>
-              <button type="submit" class="btn btn-sm btn-primary w-100">Simpan</button>
+            <div class="col-12 d-grid gap-2 d-md-flex justify-content-md-between">
+              <a href="{{ route('categories.index') }}" class="btn btn-sm btn-danger px-5">Batal</a>
+              <button type="submit" class="btn btn-sm btn-primary px-5">Simpan</button>
             </div>
           </form>
           </div>

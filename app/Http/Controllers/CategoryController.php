@@ -39,7 +39,9 @@ class CategoryController extends Controller
         $category->name = $request->name;
         $category->save();
 
-        return redirect()->route('categories.index');
+        return redirect()
+            ->route('categories.index')
+            ->with('success', 'Category berhasil ditambahkan!');
     }
 
     /**
@@ -72,7 +74,9 @@ class CategoryController extends Controller
         $category->name = $request->name;
         $category->save();
 
-        return redirect()->route('categories.index');
+        return redirect()
+            ->route('categories.index')
+            ->with('success', 'Category berhasil diperbarui!');
     }
 
     /**
@@ -80,6 +84,10 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+
+        return redirect()
+            ->route('categories.index')
+            ->with('success', 'Category berhasil dihapus!');
     }
 }
