@@ -1,27 +1,21 @@
 <x-layout>
   <x-slot:title>Edit User</x-slot:title>
   <div class="container">
-    <div class="row">
-      <div class="col-4">
+    <div class="row d-grid gap-2 d-flex justify-content-center">
+      <div class="col-6">
         <div class="card">
-          <form class="m-3" action="{{ route('users.update', ['user' => $user->id]) }}" method="post">
+          <form class="row g-3 p-3" action="{{ route('users.update', ['user' => $user->id]) }}" method="post">
             @csrf
             @method('put')
-            <div class="mb-3">
-              <label for="name" class="form-label">Nama</label>
-              <input type="text" class="form-control form-control-sm" id="name" placeholder="Elon Musk" name="name" value="{{ $user->name }}" required>
-            </div>
-            <div class="mb-3">
-              <label for="email" class="form-label">Email</label>
-              <input type="email" class="form-control form-control-sm" id="email" placeholder="Example@gmail.com" name="email" value="{{ $user->email }}" required>
-            </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control form-control-sm" id="password" name="password" placeholder="Masukan Paasword Baru">
-            </div>
+            <x-text-input type="text" name="name" label="Nama" placeholder="Masukan nama user" value="{{ old('name', $user->name) }}"></x-text-input>
+
+            <x-text-input type="email" name="email" label="Email" placeholder="Masukan email user" value="{{ old('email', $user->email) }}"></x-text-input>
+
+            <x-text-input type="password" name="password" label="password" placeholder="Masukan password baru" value="{{ old('password')}}"></x-text-input>
+
             <div class="d-grid gap-2 d-md-flex justify-content-md-between">
-              <a href="/users" class="btn btn-sm btn-danger">Batal</a>
-              <button type="submit" class="btn btn-success btn-sm">Simpan</button>
+              <a href="{{ route('users.index') }}" class="btn btn-sm btn-danger px-5">Batal</a>
+              <button type="submit" class="btn btn-success btn-sm px-5">Simpan</button>
             </div>
           </form>
         </div>

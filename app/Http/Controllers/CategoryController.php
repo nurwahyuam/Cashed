@@ -10,9 +10,15 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::all();
+        $query = Category::query();
+
+        if ($request->search) {
+            $query->where('name', 'like', "%{$request->search}%");
+        }
+
+        $categories = $query->get();
         return view('category.index', [
             'categories' => $categories,
         ]);
@@ -37,6 +43,7 @@ class CategoryController extends Controller
 
         $category = new Category();
         $category->name = $request->name;
+        $category->active = $request->active == 'on';
         $category->save();
 
         return redirect()
@@ -72,6 +79,7 @@ class CategoryController extends Controller
         ]);
 
         $category->name = $request->name;
+        $category->active = $request->active == 'on';
         $category->save();
 
         return redirect()

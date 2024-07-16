@@ -1,26 +1,17 @@
 <x-layout>
   <x-slot:title>Tambah User</x-slot:title>
   <div class="container">
-    <div class="row">
+    <div class="row d-grid gap-2 d-flex justify-content-center">
       <div class="col-6">
         <div class="card">
-          <form class="m-3" action="{{ route('users.store') }}" method="post">
+          <form class="row g-3 p-3" action="{{ route('users.store') }}" method="post">
             @csrf
-            <div class="mb-3">
-              <label for="name" class="form-label">Nama</label>
-              <input type="text" class="form-control form-control-sm" id="name" placeholder="Elon Musk" name="name" required>
-            </div>
-            <div class="mb-3">
-              <label for="email" class="form-label">Email</label>
-              <input type="email" class="form-control form-control-sm" id="email" placeholder="Example@gmail.com" name="email" required>
-            </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control form-control-sm" id="password" name="password" required>
-            </div>
+            <x-text-input name="name" type="text" label="nama" placeholder="Masukan nama user" value="{{ old('name') }}"></x-text-input>
+            <x-text-input name="email" type="email" label="email" placeholder="Masukan email user" value="{{ old('email') }}"></x-text-input>
+            <x-text-input name="password" type="password" label="password" placeholder="Masukan password user" value="{{ old('password') }}"></x-text-input>
             <div class="d-grid gap-2 d-md-flex justify-content-md-between">
-              <a href="/users" class="btn btn-sm btn-danger">Batal</a>
-              <button type="submit" class="btn btn-success btn-sm">Tambah</button>
+              <a href="{{ route('users.index') }}" class="btn btn-sm btn-danger px-5">Batal</a>
+              <button type="submit" class="btn btn-success btn-sm px-5">Tambah</button>
             </div>
           </form>
         </div>

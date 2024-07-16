@@ -31,23 +31,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
-                        Dashboard
-                    </a>
-                    <a class="nav-link {{ request()->routeIs('order') ? 'active' : '' }}" href="#">
-                        Order
-                    </a>
-                    <a class="nav-link {{ request()->routeIs('categories.index') ? 'active' : '' }}"
-                        href="{{ route('categories.index') }}">
-                        Categories
-                    </a>
-                    <a class="nav-link {{ request()->routeIs('products.index') ? 'active' : '' }}"
-                        href="/products">
-                        Products
-                    </a>
-                    <a class="nav-link {{ request()->routeIs('users.index') ? 'active' : '' }}" href="{{ route('users.index') }}">
-                        Users
-                    </a>
+                    <x-nav-link name="dashboard" label="dashboard"></x-nav-link>
+                    <x-nav-link name="order.index" label="order"></x-nav-link>
+                    <x-nav-link name="categories.index" label="categories"></x-nav-link>
+                    <x-nav-link name="products.index" label="products"></x-nav-link>
+                    <x-nav-link name="users.index" label="users"></x-nav-link>
                     <a class="nav-link" href="/login">
                         Log Out
                     </a>

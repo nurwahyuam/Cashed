@@ -11,9 +11,15 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
+        $query = User::query();
+
+        if($request->search){
+            $query->where('name', 'like', "%{$request->search}%");
+        };
+
+        $users = $query->get();
         return view('user.index', [
             'users' => $users,
         ]);
@@ -33,8 +39,8 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'email' => 'required',
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email',
             'password' => 'required',
         ]);
 
@@ -44,7 +50,9 @@ class UserController extends Controller
         $user->password = Hash::make($request->password);
         $user->save();
 
-        return redirect()->route('users.index');
+        return redirect()
+            ->route('users.index')
+            ->with('success', 'User berhasil ditambahkan!');;
     }
 
     /**
@@ -83,14 +91,20 @@ class UserController extends Controller
         }
         $user->save();
 
-        return redirect()->route('users.index');
+        return redirect()
+            ->route('users.index')
+            ->with('success', 'User berhasil diperbarui!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        return redirect()
+        ->route('users.index')
+        ->with('success', 'User berhasil dihapus!');
     }
 }

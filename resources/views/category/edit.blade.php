@@ -7,13 +7,10 @@
           <form class="row g-3 p-3" action="{{ route('categories.update', ['category' => $category->id]) }}" method="post">
             @csrf
             @method('put')
-            <div class="col-12">
-              <label for="name" class="form-label fs-6">Nama Category</label>
-              <input type="text" class="form-control form-control-sm" id="name" placeholder="Masukan Nama Category" name="name" value="{{ $category->name }}" required>
-            </div>
+            <x-text-input label="Nama Category" type="text" name="name" value="{{ old('name', $category->name) }}" placeholder="Masukan Nama Category"></x-text-input>
             <div class="col-12">
               <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" role="switch" id="active" name="active" checked>
+                <input class="form-check-input" type="checkbox" role="switch" id="active" name="active" @checked((!old() && $category->active) || old('active') == 'on')>
                 <label class="form-check-label" for="active">Aktif</label>
               </div>
             </div>
