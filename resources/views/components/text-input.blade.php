@@ -1,4 +1,4 @@
-@props(['name', 'label', 'value', 'placeholder', 'type'])
+@props(['name', 'label', 'value', 'placeholder' => '', 'type'])
 
 <div class="col-12">
   <label for="{{ $name }}" class="form-label text-capitalize">{{ $label }}</label>

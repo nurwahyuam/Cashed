@@ -1,0 +1,12 @@
+* {
+  font-family: "Inter";
+}
+
+.w-thumbnail{
+  width: 100px;
+  height: 100px;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  overflow: hidden;
+
+}
