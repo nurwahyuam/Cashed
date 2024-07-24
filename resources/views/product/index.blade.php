@@ -34,7 +34,7 @@
             </td>
             <td>{{ $product->name }}</td>
             <td>{{ $product->category->name }}</td>
-            <td> @currency($product->price) </td>
+            <td> Rp.{{ number_format($product->price) }} </td>
             <td>
               @if ($product->active)
                 <span class="badge text-bg-success">Active</span>
@@ -55,7 +55,7 @@
           </tr>
           @empty
           <tr  class="text-center">
-            <td colspan="4">Tidak Ada Data Product</td>
+            <td colspan="7">Tidak Ada Data Product</td>
           </tr>
           @endforelse
         </tbody>

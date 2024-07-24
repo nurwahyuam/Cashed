@@ -46,6 +46,11 @@ class CategoryController extends Controller
         $category->active = $request->active == 'on';
         $category->save();
 
+        // Category::query()->create([
+        //     'name' => $request->name,
+        //     'active' => $request->active == 'on',
+        // ]);
+
         return redirect()
             ->route('categories.index')
             ->with('success', 'Category berhasil ditambahkan!');

@@ -3,29 +3,37 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Middleware\EnsureOrderExistMiddleware;
 
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::middleware('auth')->group(function () {
-    Route::get('/', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-    Route::get('/order', function () {
-        return view('order.index');
-    })->name('order.index');
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::get('/orders/create', [OrderController::class, 'create'])->name('orders.create');
+
+    Route::middleware(EnsureOrderExistMiddleware::class)
+    ->group(function () {
+        Route::get('/orders/create/detail/{product}', [OrderController::class, 'createDetail'])->name('orders.create.detail');
+        Route::post('/orders/create/detail/{product}', [OrderController::class, 'storeDetail'])->name('orders.store.detail');
+
+        Route::post('/orders/checkout', [OrderController::class,'checkout'])->name('orders.checkout');
+    });
+
+    Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
 
     Route::resource('categories', CategoryController::class);
     Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 
-    Route::get('/products', [ProductController::class, 'index'])->name('products.index');
-    Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
-    Route::post('/products', [ProductController::class, 'store'])->name('products.store');
-    Route::get('/products/edit/{product}', [ProductController::class, 'edit'])->name('products.edit');
-    Route::put('/products/{product}', [ProductController::class, 'update'])->name('products.update');
+    Route::resource('products', ProductController::class);
     Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');;
 
 

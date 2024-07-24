@@ -8,5 +8,12 @@
   background-color: #f1f1f1;
   border-radius: 5px;
   overflow: hidden;
+}
 
+.product-card:hover{
+  outline: #000000 solid 2px;
+}
+
+.card-hover:hover{
+  outline: #000000 solid 2px;
 }

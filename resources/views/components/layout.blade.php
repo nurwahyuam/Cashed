@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <style>
         * {
@@ -32,15 +33,21 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                     <x-nav-link name="dashboard" label="dashboard"></x-nav-link>
-                    <x-nav-link name="order.index" label="order"></x-nav-link>
+                    <x-nav-link name="orders.index" label="order"></x-nav-link>
                     <x-nav-link name="categories.index" label="categories"></x-nav-link>
                     <x-nav-link name="products.index" label="products"></x-nav-link>
                     <x-nav-link name="users.index" label="users"></x-nav-link>
-                    <a class="nav-link" href="/login">
-                        Log Out
-                    </a>
                 </div>
             </div>
+            <form action="{{ route('logout') }}" method="post" class="d-flex align-items-center">
+                @csrf
+                <div class="text-white fw-bold me-3">
+                    {{ auth()->user()->name }}
+                </div>
+                <button type="submit" class="btn btn-sm btn-danger" href="/login">
+                    Log Out
+                </button>
+            </form>
         </div>
     </nav>
 
